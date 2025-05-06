@@ -1,0 +1,128 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+    </ion-title>
+    <ion-searchbar
+    [(ngModel)]="searchText"
+    (ionInput)="buscar($event)"
+    placeholder="Buscar"
+    (ionFocus)="isFocused = true"
+    (ionBlur)="isFocused = false"
+    >
+  </ion-searchbar>
+  <div *ngIf="isFocused">
+    <ion-list>
+      <ion-item *ngFor="let item of resultados">
+        <ion-label> {{ item }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">main</ion-title>
+    </ion-toolbar>
+  </ion-header>
+<ion-content class="ion-padding">
+  
+  <div class="card-inicio">
+    <swiper-container [pagination]="{ clickable: true }">
+      <swiper-slide><img src="assets/images/gato1.jpg" alt="Banner 1" /></swiper-slide>
+      <swiper-slide>    <img src="assets/images/gato2.jpg" alt="Banner 2" /></swiper-slide>
+      <swiper-slide>    <img src="assets/images/gato3.jpg" alt="Banner 2" /></swiper-slide>
+    </swiper-container>
+  </div>
+
+<!-- 
+Esto es solo una prueba para la conexion entre api y
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Mensajito</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{ mensaje }}
+    </ion-card-content>
+  </ion-card> 
+
+-->
+  <div class="categoria-container">
+    <ion-button expand="block" fill="clear"(click)="goToCategorias()" class="categoria-button">
+      <div class="categoria-content">
+        <span>Categorías</span>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </div>
+    </ion-button>
+
+
+    <swiper-container 
+    class="category-swiper"
+    [pagination]="{ clickable: true }"
+    [loop]="true"
+    [autoplay]="{ delay: 2500, disableOnInteraction: false }"
+    [slidesPerView]="3"
+    [spaceBetween]="1"
+  >     
+    <swiper-slide>
+      <div class="slide-content">
+        <img src="assets/images/gato1.jpg" alt="Banner 1" />
+        <p class="slide-text">Gato Tierno</p>
+      </div>
+    </swiper-slide>
+  
+    <swiper-slide>
+      <div class="slide-content">
+        <img src="assets/images/gato2.jpg" alt="Banner 2" />
+        <p class="slide-text">Gato Curioso</p>
+      </div>
+    </swiper-slide>
+  
+    <swiper-slide>
+      <div class="slide-content">
+        <img src="assets/images/gato3.jpg" alt="Banner 3" />
+        <p class="slide-text">Gato Dormilón</p>
+      </div>
+    </swiper-slide>
+
+    <swiper-slide>
+      <div class="slide-content">
+        <img src="assets/images/gato4.jpg" alt="Banner 4" />
+        <p class="slide-text">Gato Buscador</p>
+      </div>
+    </swiper-slide>
+
+    <swiper-slide>
+      <div class="slide-content">
+        <img src="assets/images/gato5.jpg" alt="Banner 5" />
+        <p class="slide-text">Gato Feliz</p>
+      </div>
+    </swiper-slide>
+
+  </swiper-container>
+
+  
+  
+  </div>
+
+  <div class="posts-section">
+    <h2>Publicaciones recientes</h2>
+
+    <ion-list>
+      <ion-item *ngFor="let post of posts">
+        <ion-avatar slot="start">
+          <img src="assets/images/gato1.jpg" alt="Avatar del usuario">
+        </ion-avatar>
+
+        <ion-label>
+          <h3>{{ post.userName }}</h3>
+          <p>{{ post.content }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+
+  </ion-content>
