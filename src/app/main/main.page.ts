@@ -65,6 +65,8 @@ export class MainPage implements OnInit {
   searchText = '';
   items = ['Manzana', 'Banana', 'Cereza', 'Damasco'];
   resultados = [...this.items];
+  isFocused= false;
+  searchQuery='';
 
   buscar(event: any) {
     const texto = event.target.value.toLowerCase();
