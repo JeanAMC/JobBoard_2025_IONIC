@@ -9,6 +9,14 @@ import { inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { ToastController } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import { chevronForwardOutline } from 'ionicons/icons';
+
+addIcons({
+  'chevron-forward-outline': chevronForwardOutline
+});
+
+
 
 @Component({
   selector: 'app-main',
@@ -19,6 +27,7 @@ import { ToastController } from '@ionic/angular';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 
 })
+
 export class MainPage implements OnInit {
 
   constructor(private router: Router, private toastController: ToastController) { }

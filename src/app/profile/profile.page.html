@@ -1,0 +1,49 @@
+<ion-content [fullscreen]="true">
+  <div class="perfil-container">
+
+             <div class="profile-header">
+          <img class="profile-background-image" src="assets/images/portada.jpg" alt="Portada">
+          <ion-icon name="camera-outline" class="edit-portada-icon"></ion-icon>
+          <div class="avatar-container">
+            <img class="perfil-img" src="assets/images/gato1.jpg" alt="Avatar">
+          </div>
+        </div>
+
+    <h2 class="perfil-nombre">{{ usuario.nombre }}</h2>
+
+    <ion-card class="info-card">
+      <ion-card-header class="info-card-header">
+        <ion-card-title class="info-card-title">Estudiante de la UCR</ion-card-title>
+        <ion-icon name="pencil-outline"class="edit-icon"></ion-icon>
+      </ion-card-header>
+      <ion-card-content class="info-card-content">
+        <p><strong>Universidad:</strong> Universidad de Costa Rica</p>
+        <p><strong>Ubicación:</strong> Guanacaste, Liberia</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="info-card">
+      <ion-card-header class="info-card-header">
+        <ion-card-title class="info-card-title">Actividad</ion-card-title>
+        <ion-icon name="pencil-outline" class="edit-icon"></ion-icon>
+      </ion-card-header>
+      <ion-card-content class="info-card-content">
+        <p>No se ha publicado nada</p>
+        <p>Tus publicaciones se mostrarán aquí</p>
+        <ion-button fill="clear" size="small">Mostrar tus publicaciones <ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="info-card">
+      <ion-card-header class="info-card-header">
+        <ion-card-title class="info-card-title">Educación</ion-card-title>
+        <ion-icon name="pencil-outline" class="edit-icon"></ion-icon>
+      </ion-card-header>
+      <ion-card-content class="info-card-content">
+        <p><strong>Universidad:</strong> Universidad de Costa Rica</p>
+        <p><strong>Años:</strong> 2000 - 2099</p>
+      </ion-card-content>
+    </ion-card>
+
+    </div>
+</ion-content>
