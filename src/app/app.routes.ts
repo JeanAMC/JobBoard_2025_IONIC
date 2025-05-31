@@ -9,6 +9,21 @@ export const routes: Routes = [
         path: 'main',
         loadComponent: () =>
           import('./main/main.page').then((m) => m.MainPage),
+      },
+      {
+        path: 'vacante',
+        loadComponent: () =>
+          import('./vacante/vacante.page').then((m) => m.VacantesPage),
+      },
+    {
+        path: 'profile',
+        loadComponent: () =>
+          import('./profile/profile.page').then((m) => m.PerfilPage),
+      },
+    {
+        path: 'postulacion',
+        loadComponent: () =>
+          import('./Postulaciones/postulaciones.page').then((m) => m.PostulacionPage),
       },]
   },
   {
@@ -18,10 +33,10 @@ export const routes: Routes = [
   },
   { path: 'home', loadComponent: () => import('./main/main.page').then( m => m.MainPage) },      
   { path: 'explore', loadComponent: () => import('./main/main.page').then( m => m.MainPage) },
-  { path: 'jobs', loadComponent: () => import('./main/main.page').then( m => m.MainPage) },
+  { path: 'jobs', loadComponent: () => import('./vacante/vacante.page').then((m) => m.VacantesPage) },
   { path: 'notifications', loadComponent: () => import('./main/main.page').then( m => m.MainPage) },
-  { path: 'profile', loadComponent: () => import('./main/main.page').then( m => m.MainPage) },
-  { path: '', redirectTo: '/tabs/home', pathMatch: 'full' },
+  { path: 'profile', loadComponent: () => import('./profile/profile.page').then((m) => m.PerfilPage) },
+  { path: '**', redirectTo: '/home' },
   {
     path: 'tabs',
     loadComponent: () => import('./tabs/tabs.page').then( m => m.TabsPage)

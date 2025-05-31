@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/vacante"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Postulaciones</ion-title>
+    <ion-buttons slot="end">
+      <div class="profile-picture-container">
+        <img src="assets/images/gato1.jpg" alt="Foto de perfil" class="profile-picture" />
+      </div>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="postulacion-container">
+    <ion-text>
+      <h1>Técnico en reparación preventiva de computadoras</h1>
+      <p>Información de contacto</p>
+    </ion-text>
+
+    <ion-item>
+      <ion-label position="floating">Nombre Completo*</ion-label>
+      <ion-input type="text" [(ngModel)]="postulacion.nombreCompleto" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email*</ion-label>
+      <ion-input type="email" [(ngModel)]="postulacion.email" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Código del país*</ion-label>
+      <ion-select [(ngModel)]="postulacion.codigoPais" interface="action-sheet" required>
+        <ion-select-option value="+501">Belice (+501)</ion-select-option>
+        <ion-select-option value="+502">Guatemala (+502)</ion-select-option>
+        <ion-select-option value="+503">El Salvador (+503)</ion-select-option>
+        <ion-select-option value="+504">Honduras (+504)</ion-select-option>
+        <ion-select-option value="+505">Nicaragua (+505)</ion-select-option>
+        <ion-select-option value="+506">Costa Rica (+506)</ion-select-option>
+        <ion-select-option value="+507">Panamá (+507)</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Número telefónico</ion-label>
+      <ion-input type="tel" [(ngModel)]="postulacion.telefono"></ion-input>
+    </ion-item>
+
+    <ion-item class="ion-align-items-center">
+      <ion-label>Adjuntar Curriculum</ion-label>
+      <ion-button color="primary" (click)="selectFile()">Cargar documento</ion-button>
+      <ion-text *ngIf="postulacion.curriculumNombre" color="secondary" class="ion-margin-start">
+        {{ postulacion.curriculumNombre }}
+      </ion-text>
+      <input type="file" hidden id="fileInput" (change)="onFileSelected($event)">
+    </ion-item>
+
+    <ion-button expand="block" (click)="enviarPostulacion()" class="enviar-button">Enviar</ion-button>
+  </div>
+</ion-content>
