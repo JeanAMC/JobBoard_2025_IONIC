@@ -56,7 +56,7 @@ export class VacantesPage implements OnInit {
       timeAgo: '8 hrs ago',
       description: 'Se requiere administrador para administrar xd.',
     },
-    // Puedes añadir más vacantes aquí
+    
   ];
 
   constructor(private router: Router) {}

@@ -22,9 +22,9 @@ import {
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-detalle-vacante', // Este selector es para el componente, no la ruta
-  templateUrl: './postulaciones.page.html', // Asegúrate de que la ruta sea correcta
-  styleUrls: ['./postulaciones.page.scss'], // Asegúrate de que la ruta sea correcta
+  selector: 'app-detalle-vacante', 
+  templateUrl: './postulaciones.page.html', 
+  styleUrls: ['./postulaciones.page.scss'], 
   standalone: true,
   imports: [
     CommonModule,
@@ -42,15 +42,15 @@ import { Location } from '@angular/common';
     IonSelectOption,
     IonButton,
     IonIcon,
-    IonText // Asegúrate de que IonText esté importado
+    IonText 
   ],
 })
 export class PostulacionPage implements OnInit {
   vacante: any;
   postulacion = {
-    nombreCompleto: '', // Nueva propiedad
+    nombreCompleto: '', 
     email: '',
-    codigoPais: '+506', // Inicializado para que el test pase si espera esto
+    codigoPais: '', 
     telefono: '',
     curriculum: null as File | null,
     curriculumNombre: ''
@@ -66,8 +66,6 @@ export class PostulacionPage implements OnInit {
 
   ngOnInit() {
     this.vacanteId = this.route.snapshot.paramMap.get('id');
-    // Aquí deberías llamar a un servicio para obtener los detalles de la vacante
-    // usando el this.vacanteId. Por ahora, vamos a simular una vacante.
     this.vacante = {
       id: this.vacanteId,
       titulo: 'Técnico en reparación preventiva de computadoras',

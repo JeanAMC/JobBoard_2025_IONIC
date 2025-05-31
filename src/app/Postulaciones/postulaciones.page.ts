@@ -76,7 +76,6 @@ export class PostulacionPage implements OnInit {
   }
 
   selectFile() {
-    // Add your logic here to trigger the file input element
     document.getElementById('fileInput')?.click();
   }
 

@@ -1,7 +1,7 @@
 
 .ion-content {
   --padding-top: 0;
-  --background: #f4f5f8; /* Un fondo gris claro */
+  --background: #f4f5f8; 
 }
 
 .perfil-container {
@@ -12,7 +12,7 @@
 
 .avatar-container {
   position: absolute;
-  top: 90px;        // Ajusta según lo alto que la quieras
+  top: 90px;        
   left: 20px;
   width: 140px;
   height: 140px;
@@ -20,7 +20,7 @@
   overflow: hidden;
   border: 5px solid white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1000;    // Muy alto para estar siempre por delante
+  z-index: 1000;   
 }
 
 .profile-background-image {
@@ -30,14 +30,14 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1; // Fondo detrás
+  z-index: 1; 
 }
 
 .profile-header {
   position: relative;
   width: 100%;
   height: 160px;
-  overflow: visible; // <-- Cambia esto para que el avatar pueda sobresalir
+  overflow: visible; 
   margin-bottom: 70px;
 }
 
@@ -51,25 +51,24 @@
   position: absolute;
   top: 16px;
   right: 16px;
-  background-color: rgba(0,0,0,0.7); // Más opaco
+  background-color: rgba(0,0,0,0.7); 
   color: #fff;
   border-radius: 50%;
-  padding: 12px;                     // Más grande
-  font-size: 2em;                    // Más grande
+  padding: 12px;                     
+  font-size: 2em;                   
   z-index: 20;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
-/* Estilos para las tarjetas de información */
 .info-card {
   background-color: white;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); 
   margin: 16px;
   width: 100%;
   max-width: 500px;
-  border: 1px solid #ddd; /* Borde sutil */
+  border: 1px solid #ddd;
 }
 
 .info-card-header {
