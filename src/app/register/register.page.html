@@ -1,0 +1,56 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login" text="Volver"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="register-container">
+    <div class="header-title-register">
+      MyWork
+    </div>
+
+    <div class="form-container">
+      <ion-text color="dark">
+        <h2>Crear Nueva Cuenta</h2>
+      </ion-text>
+      <ion-text color="medium">
+        <p>Completa tus datos para registrarte.</p>
+      </ion-text>
+
+      <ion-item lines="none" class="input-item">
+        <ion-input type="text" placeholder="Nombre completo" class="custom-input" name="fullName"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item">
+        <ion-input type="email" placeholder="Correo electrónico" class="custom-input" name="email"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item">
+        <ion-input type="password" placeholder="Contraseña" class="custom-input" name="password"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item">
+        <ion-input type="password" placeholder="Confirmar contraseña" class="custom-input" name="confirmPassword"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" color="dark" class="main-button" (click)="register()">
+        Crear Cuenta
+      </ion-button>
+
+      <ion-button expand="block" fill="clear" class="login-link-button" (click)="navigateToLogin()">
+        ¿Ya tienes cuenta? Iniciar Sesión
+      </ion-button>
+    </div>
+
+    <div class="footer-text-register ion-text-center">
+      <p>
+        Al crear una cuenta, aceptas nuestros <a href="#">Términos de Servicio</a>
+        y <a href="#">Política de Privacidad</a>.
+      </p>
+    </div>
+  </div>
+</ion-content>

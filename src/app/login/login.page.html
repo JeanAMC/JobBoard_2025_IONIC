@@ -1,0 +1,53 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="login-container">
+    <div class="header-title">
+      MyWork
+    </div>
+
+    <div class="form-container">
+      <ion-text color="dark">
+        <h2>Iniciar Sesión</h2> </ion-text>
+      <ion-text color="medium">
+        <p>Ingresa tu correo y contraseña para acceder</p> </ion-text>
+
+      <ion-item lines="none" class="input-item">
+        <ion-input type="email" placeholder="email@domain.com" class="custom-input"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item">
+        <ion-input type="password" placeholder="Contraseña" class="custom-input"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" color="dark" class="main-button" (click)="login()">
+        Continuar
+      </ion-button>
+
+      <div class="divider">
+        <span class="line"></span>
+        <span class="or-text">o</span>
+        <span class="line"></span>
+      </div>
+
+      <ion-button expand="block" class="social-button google-button" (click)="continueWithGoogle()">
+        <img slot="start" src="assets/images/google.png" alt="Google" class="social-logo"/>
+        Continuar con Google
+      </ion-button>
+
+      <ion-button expand="block" class="social-button apple-button" (click)="continueWithApple()">
+        <img slot="start" src="assets/images/apple.png" alt="Apple" class="social-logo"/>
+        Continuar con Apple
+      </ion-button>
+
+      <ion-button expand="block" fill="clear" class="register-button" (click)="navigateToRegister()">
+        ¿No tienes cuenta? Regístrate
+      </ion-button>
+      </div>
+
+    <div class="footer-text ion-text-center">
+      <p>
+        By clicking continue, you agree to our <a href="#">Terms of Service</a>
+        and <a href="#">Privacy Policy</a>
+      </p>
+    </div>
+  </div>
+</ion-content>
