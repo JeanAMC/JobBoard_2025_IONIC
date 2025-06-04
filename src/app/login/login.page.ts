@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, NavController } from '@ionic/angular';
-
+import { HttpClient} from '@angular/common/http';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -11,39 +12,60 @@ import { IonicModule, NavController } from '@ionic/angular';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class LoginPage implements OnInit {
+  password: any;
+  email: any;
 
-  // Opcional: puedes añadir propiedades para vincular con los inputs si usas ngModel
-  // email = '';
-  // password = '';
 
-  constructor(private navCtrl: NavController) { }
+  constructor(private navCtrl: NavController, private http: HttpClient,  private router: Router,) {
+
+    
+   }
 
   ngOnInit() {
   }
 
-  login() { // Renombrado desde continueWithEmail
-    // console.log('Email:', this.email);
-    // console.log('Password:', this.password);
-    console.log('Botón Continuar (Login) presionado');
-    // Lógica de inicio de sesión
-    // this.navCtrl.navigateForward('/tabs/home'); // Ejemplo de navegación post-login
-  }
+login() {
+  const loginData = {
+    email: this.email,
+    password: this.password,
+  };
+  console.log('Valor de búsqueda:', loginData.email);
+    console.log('Valor de búsqueda:', loginData.password);
+
+  this.http.post<any>('http://127.0.0.1:8000/api/login', loginData).subscribe({
+    next: (res) => {
+      if (res.token && res.user) {
+
+        localStorage.setItem('authToken', res.token);
+        localStorage.setItem('authUser', JSON.stringify(res.user));
+
+        this.router.navigate(['/main']);
+      } else {
+        console.error('Respuesta inválida del servidor', res);
+      }
+    },
+    error: (err) => {
+      console.error('Error al iniciar sesión:', err);
+
+    }
+  });
+}
+
 
   continueWithGoogle() {
     console.log('Continuar con Google presionado');
-    // Lógica de inicio de sesión con Google
+
   }
 
   continueWithApple() {
     console.log('Continuar con Apple presionado');
-    // Lógica de inicio de sesión con Apple
   }
 
-  // Nuevo método para el botón de registrarse
+
   navigateToRegister() {
     console.log('Botón Registrarse presionado');
-    // Navegar a la página de registro
-    this.navCtrl.navigateForward('/register'); // Asegúrate de que la ruta '/register' exista
+
+    this.navCtrl.navigateForward('/register');
   }
 
 }

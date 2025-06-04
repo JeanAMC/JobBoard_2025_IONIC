@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ vacancy?.Titulo }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrar()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <p><strong>Localizacion:</strong> {{ vacancy?.Localizacion }}</p>
+  <p><strong>Descripción:</strong> {{ vacancy?.Descripcion }}</p>
+  <p><strong>Salario:</strong> {{ vacancy?.Salario }}</p>
+    <p><strong>Tipo de Contrato:</strong> {{ vacancy?.Tipo_Contrato }}</p>
+  <p><strong>Nivel de experiencia:</strong> {{ vacancy?.Nivel_Experiencia }}</p>
+   <p><strong>Habilidades requeridas:</strong> {{ vacancy?.Habilidades }}</p>
+   <p><strong>Estado de la vacante:</strong> {{ vacancy?.Estado_Vacante}}</p>
+   <p class="text-xs text-gray-500"><strong>Expiracion de la vacante:</strong> {{ vacancy?.Expiracion | date:'dd/MM/yyyy' }}</p>
+  </ion-content>
