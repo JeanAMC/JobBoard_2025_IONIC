@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Agregar Vacante</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="agregarVacante()">
+    <ion-item>
+      <ion-label position="floating">Título</ion-label>
+      <ion-input [(ngModel)]="vacante.Titulo" name="Titulo" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Descripción</ion-label>
+      <ion-textarea [(ngModel)]="vacante.Descripcion" name="Descripcion" required></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Compañía</ion-label>
+      <ion-input [(ngModel)]="vacante.Compania" name="Compania" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Localización</ion-label>
+      <ion-input [(ngModel)]="vacante.Localizacion" name="Localizacion" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Salario</ion-label>
+       <ion-input
+    type="number"
+    [(ngModel)]="vacante.Salario"
+    name="salario"
+    required
+  ></ion-input> 
+    </ion-item>
+
+     <ion-item>
+      <ion-label>Tipo de contrato</ion-label>
+      <ion-select [(ngModel)]="vacante.Tipo_Contrato" name="Tipo_Contrato" interface="popover" required>
+        <ion-select-option value="full_time">Tiempo completo</ion-select-option>
+        <ion-select-option value="part_time">Medio tiempo</ion-select-option>
+        <ion-select-option value="freelance">Freelance</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Nivel de experiencia</ion-label>
+      <ion-select [(ngModel)]="vacante.Nivel_Experiencia" name="Nivel_Experiencia" interface="popover">
+        <ion-select-option value="junior">Junior</ion-select-option>
+        <ion-select-option value="mid">Intermedio</ion-select-option>
+        <ion-select-option value="senior">Senior</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label position="floating">Habilidades</ion-label>
+      <ion-input [(ngModel)]="vacante.Habilidades" name="Habilidades" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Fecha de publicación</ion-label>
+      <p></p>
+      <ion-datetime presentation="date" displayFormat="YYYY-MM-DD" [(ngModel)]="vacante.Fecha_Publicacion" name="Fecha_Publicacion"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Expiración</ion-label>
+      <p></p>
+      <ion-datetime presentation="date" displayFormat="YYYY-MM-DD" [(ngModel)]="vacante.Expiracion" name="Expiracion"></ion-datetime>
+    </ion-item>
+
+      <ion-item>
+      <ion-label>Estado</ion-label>
+      <ion-select [(ngModel)]="vacante.Estado_vacante" name="Estado_vacante" interface="popover">
+        <ion-select-option value="activo">Activo</ion-select-option>
+        <ion-select-option value="cerrado">Cerrado</ion-select-option>
+        <ion-select-option value="en revisión">En revisión</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" class="ion-margin-top">
+      Crear Vacante
+    </ion-button>
+  </form>
+</ion-content>

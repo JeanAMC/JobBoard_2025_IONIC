@@ -14,6 +14,8 @@ import {
   IonCard,
   IonCardContent,
   IonButton,
+  IonFab, 
+  IonFabButton,
 } from '@ionic/angular/standalone';
 
 import { addIcons } from 'ionicons';
@@ -56,7 +58,9 @@ export interface Vacancy {
     IonIcon,
     IonCard,
     IonCardContent,
-    IonButton,
+    IonButton,   
+    IonFab,
+    IonFabButton,
   ],
   providers: [ModalController],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -84,7 +88,7 @@ obtenerValor(event: any): void {
 }
 
   obtenerVacantes(): void {
-    const token = '5|KdW9toiyLZRWgxYxC2wT0KGzkkGELbXUvfKNHmnE9f9fdff7';
+    const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
 console.log('Texto de búsqueda:', this.busqueda);
     let params = new HttpParams();
@@ -112,7 +116,9 @@ console.log('Texto de búsqueda:', this.busqueda);
         },
       });
   }
-
+irAgregarVacante() {
+  this.router.navigate(['/agregar-vacante']);
+}
   async mostrarDetalles(vacancy: any) {
     const modal = await this.modalCtrl.create({
       component: VacanteInfoComponent,

@@ -56,7 +56,13 @@ export const routes: Routes = [
     loadComponent: () => import('./main/main.page').then( m => m.MainPage),
     canActivate: [AuthGuard]
 
-  }
+  },
+  {
+    path: 'agregar-vacante',
+    loadComponent: () => import('./agregar-vacante/agregar-vacante.page').then( m => m.AgregarVacantePage),
+        canActivate: [AuthGuard]
+  },
+
 ];
 
 
