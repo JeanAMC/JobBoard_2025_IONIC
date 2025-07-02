@@ -20,13 +20,13 @@
     </ion-text>
 
     <ion-item>
-      <ion-label position="floating">Nombre Completo*</ion-label>
-      <ion-input type="text" [(ngModel)]="postulacion.nombreCompleto" required></ion-input>
+      <ion-label position="floating">Nombre Completo</ion-label>
+      <ion-input type="text" [value]="user?.name" readonly></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Email*</ion-label>
-      <ion-input type="email" [(ngModel)]="postulacion.email" required></ion-input>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" [value]="user?.email" readonly></ion-input>
     </ion-item>
 
     <ion-item>
@@ -43,19 +43,19 @@
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Número telefónico</ion-label>
-      <ion-input type="tel" [(ngModel)]="postulacion.telefono"></ion-input>
+      <ion-label position="floating">Número telefónico*</ion-label>
+      <ion-input type="tel" [(ngModel)]="postulacion.numeroTelefono" required></ion-input>
     </ion-item>
 
     <ion-item class="ion-align-items-center">
-      <ion-label>Adjuntar Curriculum</ion-label>
+      <ion-label>Adjuntar Curriculum*</ion-label>
       <ion-button color="primary" (click)="selectFile()">Cargar documento</ion-button>
       <ion-text *ngIf="postulacion.curriculumNombre" color="secondary" class="ion-margin-start">
         {{ postulacion.curriculumNombre }}
       </ion-text>
-      <input type="file" hidden id="fileInput" (change)="onFileSelected($event)">
+      <input type="file" hidden id="fileInput" (change)="onFileSelected($event)" accept=".pdf,.doc,.docx">
     </ion-item>
 
-    <ion-button expand="block" (click)="enviarPostulacion()" class="enviar-button">Enviar</ion-button>
+    <ion-button expand="block" (click)="enviarPostulacion()" class="enviar-button">Enviar Postulación</ion-button>
   </div>
 </ion-content>
