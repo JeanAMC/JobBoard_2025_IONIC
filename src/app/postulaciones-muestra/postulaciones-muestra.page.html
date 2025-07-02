@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Postulaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="p-4">
+    <ion-card *ngFor="let postulacion of postulaciones">
+      <ion-card-header>
+        <ion-card-title>{{ postulacion.postulante.name }}</ion-card-title>
+        <ion-card-subtitle>{{ postulacion.estado }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        Teléfono: {{ postulacion.telefono }} <br />
+        <ion-button
+          color="success"
+          (click)="cambiarEstado(postulacion.id, 'aceptada')"
+        >
+          Aceptar
+        </ion-button>
+        <ion-button
+          color="danger"
+          (click)="cambiarEstado(postulacion.id, 'rechazada')"
+        >
+          Rechazar
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

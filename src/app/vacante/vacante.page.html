@@ -61,15 +61,26 @@
             >
               Requisitos
             </ion-button>
+            
+            <ion-button
+              *ngIf="vacancy.user_id === currentUserId"
+              fill="outline"
+              size="small"
+              color="secondary"
+              (click)="verPostulaciones(vacancy)"
+            >
+              Ver postulaciones
+            </ion-button>
+
             <ion-button
               fill="solid"
               size="small"
               color="primary"
-              (click)="postular(); $event.stopPropagation()"
-              routerDirection="forward"
+              (click)="postular(vacancy); $event.stopPropagation()"
             >
               Postular
             </ion-button>
+
           </div>
         </ion-card-content>
       </ion-card>

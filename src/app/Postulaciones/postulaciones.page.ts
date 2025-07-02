@@ -3,9 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NavController, ToastController } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-
+import { firstValueFrom } from 'rxjs';
 import {
   IonHeader,
   IonToolbar,
@@ -94,74 +94,87 @@ export class PostulacionPage implements OnInit {
 
   }
 
-  async loadUserData() {
-    try {
-      this.user = await this.http.get<User>(`${this.apiUrl}/user`).toPromise();
-    } catch (error) {
-      console.error('Error al cargar datos del usuario:', error);
-      this.presentToast('Error al cargar la información del usuario.', 'danger');
+async loadUserData() {
+  try {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      this.presentToast('No se encontró token de autenticación.', 'warning');
+      return;
     }
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    this.user = await firstValueFrom(
+      this.http.get<User>(`${this.apiUrl}/user`, { headers })
+    );
+  } catch (error) {
+    console.error('Error al cargar datos del usuario:', error);
+    this.presentToast('Error al cargar la información del usuario.', 'danger');
   }
+}
+
   
   selectFile() {
     document.getElementById('fileInput')?.click();
   }
 
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      console.log('Archivo seleccionado:', file.name);
-      this.postulacion.curriculum = file;
-      this.postulacion.curriculumNombre = file.name;
-    } else {
-      this.postulacion.curriculum = null;
-      this.postulacion.curriculumNombre = '';
-    }
+  onFileSelected(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files.length > 0) {
+    const file = input.files[0];
+    console.log('Archivo seleccionado:', file.name);
+    this.postulacion.curriculum = file;
+    this.postulacion.curriculumNombre = file.name;
+  } else {
+    this.postulacion.curriculum = null;
+    this.postulacion.curriculumNombre = '';
+  }
+}
+
+async enviarPostulacion() {
+  if (!this.postulacion.curriculum) {
+    this.presentToast('Debes adjuntar tu currículum antes de postularte.', 'warning');
+    return;
+  }
+  if (!this.postulacion.codigoPais || !this.postulacion.numeroTelefono) {
+    this.presentToast('Por favor, completa el código de país y el número telefónico.', 'warning');
+    return;
+  }
+  if (!this.vacanteId) {
+    this.presentToast('No se pudo determinar la vacante a la que postularse.', 'danger');
+    return;
   }
 
-  async enviarPostulacion() {
-    if (!this.postulacion.curriculum) {
-      this.presentToast('Debes adjuntar tu currículum antes de postularte.', 'warning');
-      return;
-    }
-    if (!this.postulacion.codigoPais || !this.postulacion.numeroTelefono) {
-      this.presentToast('Por favor, completa el código de país y el número telefónico.', 'warning');
-      return;
-    }
-    if (!this.vacanteId) {
-      this.presentToast('No se pudo determinar la vacante a la que postularse.', 'danger');
-      return;
-    }
+  this.isLoading = true;
 
-    this.isLoading = true;
+  this.postulacion.telefono = this.postulacion.codigoPais + this.postulacion.numeroTelefono;
 
-    this.postulacion.telefono = this.postulacion.codigoPais + this.postulacion.numeroTelefono;
-
-    const formData = new FormData();
-    formData.append('vacantetrabajo_id', this.vacanteId);
-    formData.append('telefono', this.postulacion.telefono);
-    if (this.postulacion.curriculum) {
-      formData.append('curriculum_vitae', this.postulacion.curriculum, this.postulacion.curriculum.name);
-    }
-
-    try {
-      const response = await this.http.post(`${this.apiUrl}/postulaciones`, formData).toPromise();
-      console.log('Postulación enviada exitosamente:', response);
-      this.presentToast('¡Postulación enviada con éxito!', 'success');
-      this.router.navigateByUrl('/main/tabs/vacantes');
-    } catch (error: any) {
-      console.error('Error al enviar postulación:', error);
-      let errorMessage = 'Error al enviar la postulación. Inténtalo de nuevo.';
-      if (error.error && error.error.message) {
-        errorMessage = error.error.message;
-      } else if (error.message) {
-        errorMessage = error.message;
-      }
-      this.presentToast(errorMessage, 'danger');
-    } finally {
-      this.isLoading = false;
-    }
+  const formData = new FormData();
+  formData.append('vacantetrabajo_id', this.vacanteId);
+  formData.append('telefono', this.postulacion.telefono);
+  if (this.postulacion.curriculum) {
+    formData.append('curriculum_vitae', this.postulacion.curriculum, this.postulacion.curriculum.name);
   }
+
+  try {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+
+    const response = await firstValueFrom(
+      this.http.post(`${this.apiUrl}/postulaciones`, formData, { headers })
+    );
+
+    console.log('Postulación enviada exitosamente:', response);
+    this.presentToast('¡Postulación enviada con éxito!', 'success');
+    this.router.navigateByUrl('/vacante');
+  } catch (error: any) {
+    console.error('Error al enviar postulación:', error);
+  } finally {
+    this.isLoading = false;
+  }
+}
+
 
   async presentToast(message: string, color: string = 'primary') {
     const toast = await this.toastController.create({

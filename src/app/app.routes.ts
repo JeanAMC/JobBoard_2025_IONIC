@@ -32,12 +32,18 @@ export const routes: Routes = [
           import('./profile/profile.page').then((m) => m.PerfilPage),
         canActivate: [AuthGuard]
       },
-    {
-        path: 'postulacion',
+      {
+        path: 'postulaciones-muestra/:vacanteId',
         loadComponent: () =>
-          import('./Postulaciones/postulaciones.page').then((m) => m.PostulacionPage),
-        canActivate: [AuthGuard]  
-      },]
+          import('./postulaciones-muestra/postulaciones-muestra.page').then((m) => m.PostulacionesMuestraPage),
+        canActivate: [AuthGuard]
+      },
+    {
+      path: 'postulacion/:id',
+      loadComponent: () => import('./Postulaciones/postulaciones.page').then(m => m.PostulacionPage),
+      canActivate: [AuthGuard]
+    }
+,]
   },
   {
         path: 'login',
@@ -62,6 +68,11 @@ export const routes: Routes = [
     loadComponent: () => import('./agregar-vacante/agregar-vacante.page').then( m => m.AgregarVacantePage),
         canActivate: [AuthGuard]
   },
+  {
+    path: 'postulaciones-muestra',
+    loadComponent: () => import('./postulaciones-muestra/postulaciones-muestra.page').then( m => m.PostulacionesMuestraPage)
+  },
+
 
 ];
 

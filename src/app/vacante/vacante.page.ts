@@ -38,6 +38,7 @@ export interface Vacancy {
   Localizacion: string;
   Salario?: number;
   Fecha_Publicacion: Date;
+  user_id: number;
 }
 
 @Component({
@@ -66,7 +67,9 @@ export interface Vacancy {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class VacantesPage implements OnInit {
+   currentUserId: number | null = null;
   constructor(
+    
     private router: Router,
     private toastController: ToastController,
     private modalCtrl: ModalController,
@@ -74,6 +77,7 @@ export class VacantesPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.obtenerUsuario();
     this.obtenerVacantes();
   }
 
@@ -86,6 +90,25 @@ obtenerValor(event: any): void {
   this.busqueda = valor;
   this.obtenerVacantes();
 }
+obtenerUsuario(): void {
+  const token = localStorage.getItem('authToken');
+  const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+
+  this.http
+    .get<{ user: { id: number; name: string; email: string } }>('http://127.0.0.1:8000/api/user', {
+      headers,
+    })
+    .subscribe({
+      next: (res) => {
+        this.currentUserId = res.user.id;
+        console.log('Usuario autenticado:', res.user);
+      },
+      error: (err) => {
+        console.error('Error obteniendo el usuario', err);
+      },
+    });
+}
+
 
   obtenerVacantes(): void {
     const token = localStorage.getItem('authToken');
@@ -128,8 +151,16 @@ irAgregarVacante() {
     });
     await modal.present();
   }
-
-  postular() {
-    this.router.navigate(['/postulacion']);
+verPostulaciones(vacancy: Vacancy) {
+  if (vacancy && vacancy.id) {
+    this.router.navigate(['/postulaciones-muestra', vacancy.id]);
   }
+}
+
+postular(vacancy: Vacancy) {
+  if (vacancy && vacancy.id) {
+    this.router.navigate(['/postulacion', vacancy.id]);
+  }
+}
+
 }
